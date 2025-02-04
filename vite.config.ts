@@ -27,14 +27,10 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [{
           urlPattern: new RegExp('.*'),
-          handler: 'NetworkOnly',
+          handler: 'NetworkFirst',
           options: {
             cacheName: 'todo-cache',
-            networkTimeoutSeconds: 10,
-            fetchOptions: {
-              mode: 'cors',
-              credentials: 'same-origin'
-            }
+            networkTimeoutSeconds: 10
           }
         }]
       }
