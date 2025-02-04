@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=1, stale-while-revalidate=59",
+        "x-vercel-ip-version": "4"
+      },
+      "continue": true
+    }
+  ],
+  "regions": ["hnd1"],
+  "cleanUrls": true,
+  "trailingSlash": false
+} 
