@@ -20,7 +20,8 @@ export default defineConfig({
         theme_color: '#1976D2',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/'
+        start_url: './',
+        scope: './'
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
@@ -36,7 +37,12 @@ export default defineConfig({
     })
   ],
   server: {
-    host: true // 添加这个配置使得可以通过IP地址访问
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
+    https: false,
+    cors: true,
+    proxy: {}
   },
   resolve: {
     alias: {
