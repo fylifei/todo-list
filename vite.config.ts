@@ -26,11 +26,15 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [{
-          urlPattern: new RegExp('/*'),
-          handler: 'NetworkFirst',
+          urlPattern: new RegExp('.*'),
+          handler: 'NetworkOnly',
           options: {
             cacheName: 'todo-cache',
-            networkTimeoutSeconds: 5
+            networkTimeoutSeconds: 10,
+            fetchOptions: {
+              mode: 'cors',
+              credentials: 'same-origin'
+            }
           }
         }]
       }
@@ -38,11 +42,31 @@ export default defineConfig({
   ],
   server: {
     host: true,
-    port: 5173
+    port: 5173,
+    strictPort: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    }
   },
   resolve: {
     alias: {
       'src': path.resolve(__dirname, './src')
+    }
+  },
+  build: {
+    target: 'es2015',
+    minify: 'terser',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        }
+      }
     }
   }
 })
