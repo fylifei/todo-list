@@ -40,6 +40,9 @@ export default defineConfig({
     host: true,
     port: 5173,
     strictPort: true,
+    allowedHosts: [
+      '80905r04y1.zicp.fun'
+    ],
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
